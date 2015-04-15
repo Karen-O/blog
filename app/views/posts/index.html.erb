@@ -1,0 +1,19 @@
+<h3>Posts</h3>
+
+<ul>
+
+<li> <%= link_to("Create New Post", new_post_path) %> </li>	
+
+	<!-- new_post_path because we're creating a NEW post, so there's no post yet to reference in the path. -->
+
+	<% @posts.each do |post| %>    <!-- set up enumerator -->
+
+		<li> <%= link_to(post.title, post_path( post)) %> </li>   
+
+			<!-- still starting with "link to" because even though it's an index file (purpose to "list all"), each post in the list will be a link to that post. -->
+
+			<!-- doesn't need "@post.title" because the "@posts.each" carries through here (as the variable in the pipes); same reason why post_path(post) doesn't need a post id, for instance: it references the specific |post| -->
+
+	<% end %>
+
+</ul>

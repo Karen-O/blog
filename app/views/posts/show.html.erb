@@ -1,0 +1,36 @@
+<h3> <%= @post.title %> </h3>
+
+<p> <%= @post.content %> </p>
+
+<br />
+
+<!-- now, one link to edit the post and one link to delete the post -->
+
+<%= link_to("Edit Post", edit_post_path(@post)) %>  
+<!-- We need the instance variable @post because we're pulling it from the controller... aka, not a local variable. -->
+<%= link_to("Delete Post", post_path(@post), method: :delete) %>   
+<!-- No direct DELETE route because all that's needed is detroy the route to the post itself. -->
+
+<h4> COMMENTS </h4>   
+<!-- this is essentially a mini "index" for comments, as well as the "show" page for comments (for the Post page they belongs_to) -->
+
+<ul>
+
+<li> <%= link_to("Post New Comment", new_post_comment_path(@post)) %> </li>	
+<!-- links to GET form that allows user to enter new comment on a post -->
+
+	<% @comments.each do |comment| %>    <!-- set up enumerator -->
+
+		<li> <%= comment.username %> - <%= comment.content %> </li>   
+
+			<!-- doesn't need "@comment.title" because the "@comments.each" carries through here (as the variable in the pipes); same reason why post_comment_path(comment) doesn't need a comment id, for instance: it references the specific |comment| -->
+
+		<%= link_to("Edit Comment", edit_post_comment_path(@post, comment)) %>  
+<!-- We need the instance variable @post because we're pulling it from the controller... aka, not a local variable. -->
+<!-- HOWEVER! We do still have access to the 'comment' variable, since we're still inside the enumerator -->
+		<%= link_to("Delete Comment", post_comment_path(@post, comment), method: :delete) %>   
+<!-- use the same SHOW route for DELETE route -->
+	<% end %>
+
+</ul>
+
