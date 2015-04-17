@@ -1,10 +1,10 @@
 <!-- 2 things in the 'GET' form page = (1) form to submit to database; and (2) code to show an error if it was done wrong. -->
 
-<% if @post.errors.any? %>
+<% if @comment.errors.any? %>
 	
 	<ul>					<!-- <ul> will then list the errors, <li> by <li> -->
 
-		<% @post.errors.full_messages.each do |error| %>
+		<% @comment.errors.full_messages.each do |error| %>
 	<!-- 'full_messages' method is called on 'errors' method to print out the full error message; the 'each' method is then called on the entirety to iterate the process through each |error| message applicable to this post. -->
 			<li> <%= error %> </li>
 
@@ -16,7 +16,7 @@
 
 
 
-<%= form_for @post do |f| %>    <!-- the 'f' = convention for form_for's -->
+<%= form_for [@post, @comment] do |f| %>    <!-- the 'f' = convention for form_for's -->
 	
 	<%= f.label :title %>
 	<%= f.text_field :title %>
